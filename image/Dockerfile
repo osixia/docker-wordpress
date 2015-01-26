@@ -1,4 +1,4 @@
-FROM osixia/baseimage:0.10.1
+FROM osixia/baseimage:0.10.2
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 ## Default configuration: can be overridden at the docker command line
@@ -21,7 +21,7 @@ ENV HOME /root
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-ADD service/wordpress/ssl /etc/nginx/ssl
+ADD service/wordpress/nginx/ssl /etc/nginx/ssl
 
 # Enable php and nginx
 RUN /sbin/enable-service php5-fpm nginx \
