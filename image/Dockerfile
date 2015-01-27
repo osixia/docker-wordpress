@@ -8,8 +8,8 @@ ENV DB_USER wp-user
 ENV DB_PASSWORD wp-password
 ENV DB_TABLE_PREFIX wp_
 
-ENV SSL_CRT_FILENAME wp.crt
-ENV SSL_KEY_FILENAME wp.key
+ENV SSL_CRT_FILENAME wordpress.crt
+ENV SSL_KEY_FILENAME wordpress.key
 
 # Wordpress version
 ENV WP_VERSION 4.1
@@ -21,15 +21,10 @@ ENV HOME /root
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-ADD service/wordpress/nginx/ssl /etc/nginx/ssl
-
 # Enable php and nginx
-RUN /sbin/enable-service php5-fpm nginx \
-&& /sbin/nginx-add-vhost wordpress /var/www/wordpress --php --ssl \
---ssl-crt=/etc/nginx/ssl/$SSL_CRT_FILENAME \
---ssl-key=/etc/nginx/ssl/$SSL_KEY_FILENAME
+RUN apt-get update && /sbin/enable-service php5-fpm nginx 
 
-#Download, check integrity and unzip wordpress to /var/www/wordpress
+# Download, check integrity and unzip wordpress to /var/www/wordpress
 RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WP_VERSION}.tar.gz \
 	&& echo "$WP_SHA1 *wordpress.tar.gz" | sha1sum -c - \
 	&& tar -xzf wordpress.tar.gz \
@@ -37,9 +32,17 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WP_VERSION}.t
 	&& rm wordpress.tar.gz \
 	&& rm -rf wordpress
 
-ADD service/wordpress/ sbin/wordpress/
+# Add nginx config
+ADD service/wordpress/nginx/ /etc/nginx/wordpress
 
-# Set wordpress directory in a data volume
+# Run install script
+ADD service/install.sh /tmp/install.sh
+RUN ./tmp/install.sh && rm /tmp/install.sh
+
+# Add Wordpress container start config
+ADD service/wordpress/container-start.sh /etc/my_init.d/wordpress
+
+# Set wordpress data directory in a data volume
 VOLUME ["/var/www"]
 
 # Expose http and https default ports

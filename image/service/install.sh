@@ -11,10 +11,7 @@ chmod 644 /var/www/wp-config.php
 echo "define('DISALLOW_FILE_EDIT',true);" >> /var/www/wp-config.php 
 
 # Disable auto update
-echo "add_filter('automatic_updater_disabled', '__return_true');" >> /var/www/wordpress/wp-includes/functions.php
+echo "add_filter('automatic_updater_disabled', '__return_true');" >> /var/www/wp-config.php
 
 # Replace login errors with a less precise text
-echo "add_filter('login_errors', create_function('$no_login_error', \"return 'Bad credentials';\"));" >> /var/www/wordpress/wp-includes/functions.php
-
-
-
+echo "add_filter('login_errors', create_function('$no_login_error', \"return 'Bad credentials';\"));" >> /var/www/wp-config.php
