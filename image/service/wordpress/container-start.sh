@@ -15,14 +15,6 @@ if [ ! -e "$FIRST_START_DONE" ]; then
     /sbin/nginx-add-vhost wordpress /var/www/wordpress localhost $HOSTNAME --php
   fi
 
-  # remove default vhost
-  /sbin/nginx-remove-vhost default
-
-  # add nginx config
-  cat /etc/nginx/wordpress/nginx.conf >> /etc/nginx/nginx.conf
-  ln -s /etc/nginx/wordpress/http.conf /etc/nginx/conf.d/wordpress.conf
-  /sbin/nginx-vhost-add-config wordpress "$(cat /etc/nginx/wordpress/server.conf)"
-
   # set db configuration
   sed -i "s/define('DB_NAME', '[^']*'/define('DB_NAME', '${DB_NAME}'/g" /var/www/wp-config.php
   sed -i "s/define('DB_USER', '[^']*'/define('DB_USER', '${DB_USER}'/g" /var/www/wp-config.php

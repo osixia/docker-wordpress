@@ -26,8 +26,11 @@ ENV HOME /root
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
-# Enable php and nginx
-RUN apt-get update && /sbin/enable-service php5-fpm nginx 
+# Install apache2 and php5-fpm using osixia/baseimage utils
+# Caution: /sbin/enable-service arguments order is important
+# php5-fpm install will detect apache2 and configure it
+RUN apt-get update && /sbin/enable-service apache2 php5-fpm \
+	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends php5-mysql
 
 # Download, check integrity and unzip wordpress to /var/www/wordpress
 RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
@@ -37,8 +40,8 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VER
 	&& rm wordpress.tar.gz \
 	&& rm -rf wordpress
 
-# Add nginx config
-ADD service/wordpress/nginx/ /etc/nginx/wordpress
+# Add wordpress .htaccess
+ADD service/wordpress/assets/.htaccess /var/www/wordpress/.htaccess
 
 # Run install script
 ADD service/install.sh /tmp/install.sh
