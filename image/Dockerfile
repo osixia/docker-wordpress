@@ -2,19 +2,28 @@ FROM osixia/baseimage:0.10.2
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 ## Default configuration: can be overridden at the docker command line
+# Db Config
 ENV DB_HOST 172.17.42.1
 ENV DB_NAME wordpress
 ENV DB_USER wp-user
 ENV DB_PASSWORD wp-password
 ENV DB_TABLE_PREFIX wp_
 
+# wordpress server
+ENV SERVER_NAME example.org
+ENV SERVER_ADMIN webmaster@example.org
 ENV HTTPS true
 
-# self signed certificat will be generated 
-# if HTTPS is set to true and this files
-# don't exists in service/wordpress/nginx/ssl
+# Self signed certificat will be generated 
+# if HTTPS is set to true and no certificat and key are provided.
+
+# To use your custom certificat and key 2 options :
+# - add them in service/wordpress/apache2 and build the image
+# - or mount a data volume with thoses files to /osixia/wordpress/apache2
+#   during container start
 ENV SSL_CRT_FILENAME wordpress.crt
 ENV SSL_KEY_FILENAME wordpress.key
+ENV SSL_CA_CRT_FILENAME ca.crt
 
 # Wordpress version
 ENV WORDPRESS_VERSION 4.1
@@ -40,8 +49,8 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VER
 	&& rm wordpress.tar.gz \
 	&& rm -rf wordpress
 
-# Add wordpress .htaccess
-ADD service/wordpress/assets/.htaccess /var/www/wordpress/.htaccess
+# Add wordpress apache2 config files
+ADD service/wordpress/apache2 /osixia/wordpress/apache2
 
 # Run install script
 ADD service/install.sh /tmp/install.sh

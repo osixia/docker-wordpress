@@ -1,5 +1,6 @@
 #!/bin/bash
 # this script is run during the container start
+set -e
 
 FIRST_START_DONE="/etc/docker-wordpress-first-start-done"
 

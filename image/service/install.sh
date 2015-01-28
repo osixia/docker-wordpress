@@ -4,6 +4,9 @@
 # remove apache default host
 a2dissite 000-default
 
+# add mod_rewrite apache module
+a2enmod rewrite
+
 # Move wp-config.php 
 mv /var/www/wordpress/wp-config-sample.php /var/www/wp-config.php
 
