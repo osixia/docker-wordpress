@@ -38,7 +38,7 @@ CMD ["/sbin/my_init"]
 # Install apache2 and php5-fpm using osixia/baseimage utils
 # Caution: /sbin/enable-service arguments order is important
 # php5-fpm install will detect apache2 and configure it
-RUN apt-get update && /sbin/enable-service apache2 php5-fpm \
+RUN apt-get update && /sbin/enable-service apache2 php5-fpm ssl-kit \
 	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends php5-mysql
 
 # Download, check integrity and unzip wordpress to /var/www/wordpress

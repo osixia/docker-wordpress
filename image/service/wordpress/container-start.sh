@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/bash -e
 # this script is run during the container start
-set -e
 
 FIRST_START_DONE="/etc/docker-wordpress-first-start-done"
 
@@ -9,11 +8,19 @@ if [ ! -e "$FIRST_START_DONE" ]; then
   
   # create wordpress vhost
   if [ "$HTTPS" == "true" ]; then
-    /sbin/nginx-add-vhost wordpress /var/www/wordpress localhost $HOSTNAME --php --ssl \
-                          --ssl-crt=/etc/nginx/wordpress/ssl/$SSL_CRT_FILENAME \
-                          --ssl-key=/etc/nginx/wordpress/ssl/$SSL_KEY_FILENAME
+
+    # check certificat and key or create them
+    /sbin/ssl-kit "/osixia/wordpress/apache2/$SSL_CRT_FILENAME" "/osixia/wordpress/apache2/$SSL_KEY_FILENAME"
+
+    # add CA certificat config if CA cert exists
+    if [ -e "/osixia/wordpress/apache2/$SSL_CA_CRT_FILENAME" ]; then
+      sed -i "s/#SSLCACertificateFile/SSLCACertificateFile/g" /osixia/wordpress/apache2/wordpress-ssl.conf
+    fi
+
+    a2ensite wordpress-ssl
+
   else
-    /sbin/nginx-add-vhost wordpress /var/www/wordpress localhost $HOSTNAME --php
+    a2ensite wordpress
   fi
 
   # set db configuration

@@ -1,10 +1,15 @@
-#!/bin/bash
+#!/bin/bash -e
 # this script is run during the image build
 
-# remove apache default host
-a2dissite 000-default
+# Add wordpress virtualhosts
+ln -s /osixia/wordpress/apache2/wordpress.conf /etc/apache2/sites-available/wordpress.conf
+ln -s /osixia/wordpress/apache2/wordpress-ssl.conf /etc/apache2/sites-available/wordpress-ssl.conf
 
-# add mod_rewrite apache module
+# Remove apache default host
+a2dissite 000-default
+rm -rf /var/www/html
+
+# Add mod_rewrite apache module
 a2enmod rewrite
 
 # Move wp-config.php 
@@ -19,6 +24,9 @@ echo "add_filter('automatic_updater_disabled', '__return_true');" >> /var/www/wp
 # Replace login errors with a less precise text
 echo "add_filter('login_errors', create_function('$no_login_error', \"return 'Bad credentials';\"));" >> /var/www/wp-config.php
 
-# fix file permission
+# Add .htaccess
+cp /osixia/wordpress/apache2/.htaccess /var/www/wordpress/.htaccess
+
+# Fix file permission
 find /var/www/ -type d -exec chmod 755 {} \;
 find /var/www/ -type f -exec chmod 644 {} \;
