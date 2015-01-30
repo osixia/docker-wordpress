@@ -11,38 +11,33 @@ ENV HOME /root
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
+# Add install script and wordpress assets
+ADD service/install.sh /tmp/install.sh
+ADD service/wordpress/assets /osixia/wordpress
+
 # Install apache2 and php5-fpm using osixia/baseimage utils
 # Caution: /sbin/enable-service arguments order is important
 # php5-fpm install will detect apache2 and configure it
 
-# Download, check integrity and unzip wordpress to /var/www/wordpress
+# Download, check integrity and unzip wordpress to /var/www/wordpress,
+# run install script and clean all
 RUN apt-get update && /sbin/enable-service apache2 php5-fpm ssl-kit \
 	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends php5-mysql \
 	&& curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
 	&& echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c - \
-	&& tar -xzf wordpress.tar.gz \
-	&& mv wordpress /var/www \
-	&& rm wordpress.tar.gz \
-	&& rm -rf wordpress
+	&& tar -xzf wordpress.tar.gz && mv wordpress /var/www \
+	&& ./tmp/install.sh && rm /tmp/install.sh \
+	&& rm wordpress.tar.gz && rm -rf wordpress \
+	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Add wordpress apache2 config files
-ADD service/wordpress/assets /osixia/wordpress
-
-# Run install script
-ADD service/install.sh /tmp/install.sh
-RUN ./tmp/install.sh && rm /tmp/install.sh
-
-# default env variables
+# Add default env variables
 ADD env.json /etc/env.json
 
 # Add Wordpress container start config
 ADD service/wordpress/container-start.sh /etc/my_init.d/wordpress
 
 # Set wordpress data directory in a data volume
-VOLUME ["/var/www"]
+VOLUME ["/var/www/wordpress"]
 
 # Expose http and https default ports
 EXPOSE 80 443
-
-# Clear out the local repository of retrieved package files
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
