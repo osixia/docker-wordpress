@@ -23,6 +23,11 @@ if [ ! -e "$FIRST_START_DONE" ]; then
     a2ensite wordpress
   fi
 
+  # set new install default theme
+  if [ -n "$WORDPRESS_DEFAULT_THEME" ]; then
+    sed -i "s/define( 'WP_DEFAULT_THEME', '[^']*'/define( 'WP_DEFAULT_THEME', '${WORDPRESS_DEFAULT_THEME}'/g" /var/www/wordpress/wp-includes/default-constants.php
+  fi
+
   # set db configuration
   sed -i "s/define('DB_NAME', '[^']*'/define('DB_NAME', '${DB_NAME}'/g" /var/www/wp-config.php
   sed -i "s/define('DB_USER', '[^']*'/define('DB_USER', '${DB_USER}'/g" /var/www/wp-config.php

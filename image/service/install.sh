@@ -12,6 +12,10 @@ rm -rf /var/www/html
 # Add mod_rewrite apache module
 a2enmod rewrite
 
+# install plugins and themes
+mv /osixia/wordpress/wp-content/plugins /var/www/wordpress/wp-content/plugins
+mv /osixia/wordpress/wp-content/themes /var/www/wordpress/wp-content/themes
+
 # Move wp-config.php 
 mv /var/www/wordpress/wp-config-sample.php /var/www/wp-config.php
 

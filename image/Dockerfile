@@ -1,30 +1,6 @@
 FROM osixia/baseimage:0.10.2
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
-## Default configuration: can be overridden at the docker command line
-# Db Config
-ENV DB_HOST 172.17.42.1
-ENV DB_NAME wordpress
-ENV DB_USER wp-user
-ENV DB_PASSWORD wp-password
-ENV DB_TABLE_PREFIX wp_
-
-# wordpress server
-ENV SERVER_NAME example.org
-ENV SERVER_ADMIN webmaster@example.org
-ENV HTTPS true
-
-# Self signed certificat will be generated 
-# if HTTPS is set to true and no certificat and key are provided.
-
-# To use your custom certificat and key 2 options :
-# - add them in service/wordpress/apache2 and build the image
-# - or mount a data volume with thoses files to /osixia/wordpress/apache2
-#   during container start
-ENV SSL_CRT_FILENAME wordpress.crt
-ENV SSL_KEY_FILENAME wordpress.key
-ENV SSL_CA_CRT_FILENAME ca.crt
-
 # Wordpress version
 ENV WORDPRESS_VERSION 4.1
 ENV WORDPRESS_SHA1 f0437c96ae3d8acaba3579566f1346f4cd06468e
@@ -38,11 +14,11 @@ CMD ["/sbin/my_init"]
 # Install apache2 and php5-fpm using osixia/baseimage utils
 # Caution: /sbin/enable-service arguments order is important
 # php5-fpm install will detect apache2 and configure it
-RUN apt-get update && /sbin/enable-service apache2 php5-fpm ssl-kit \
-	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends php5-mysql
 
 # Download, check integrity and unzip wordpress to /var/www/wordpress
-RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
+RUN apt-get update && /sbin/enable-service apache2 php5-fpm ssl-kit \
+	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends php5-mysql \
+	&& curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
 	&& echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c - \
 	&& tar -xzf wordpress.tar.gz \
 	&& mv wordpress /var/www \
@@ -50,11 +26,14 @@ RUN curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VER
 	&& rm -rf wordpress
 
 # Add wordpress apache2 config files
-ADD service/wordpress/apache2 /osixia/wordpress/apache2
+ADD service/wordpress/assets /osixia/wordpress
 
 # Run install script
 ADD service/install.sh /tmp/install.sh
 RUN ./tmp/install.sh && rm /tmp/install.sh
+
+# default env variables
+ADD env.json /etc/env.json
 
 # Add Wordpress container start config
 ADD service/wordpress/container-start.sh /etc/my_init.d/wordpress
