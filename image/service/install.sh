@@ -30,7 +30,3 @@ echo "add_filter('login_errors', create_function('$no_login_error', \"return 'Ba
 
 # Add .htaccess
 cp /osixia/wordpress/apache2/.htaccess /var/www/wordpress/.htaccess
-
-# Fix file permission
-find /var/www/ -type d -exec chmod 755 {} \;
-find /var/www/ -type f -exec chmod 644 {} \;

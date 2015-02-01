@@ -9,7 +9,7 @@ if [ ! -e "$FIRST_START_DONE" ]; then
   # create wordpress vhost
   if [ "$HTTPS" == "true" ]; then
 
-    # check certificat and key or create them
+    # check certificat and key or create it
     /sbin/ssl-kit "/osixia/wordpress/apache2/$SSL_CRT_FILENAME" "/osixia/wordpress/apache2/$SSL_KEY_FILENAME"
 
     # add CA certificat config if CA cert exists
@@ -46,6 +46,12 @@ if [ ! -e "$FIRST_START_DONE" ]; then
     get_salt
     sed -i "s/define('${key}', *'[^']*'/define('${key}', '${salt}'/g" /var/www/wp-config.php 
   done
+
+  # Fix file permission
+  find /var/www/ -type d -exec chmod 755 {} \;
+  find /var/www/ -type f -exec chmod 644 {} \;
+  chmod 400 /var/www/wp-config.php
+  chown www-data:www-data -R /var/www
 
   touch $FIRST_START_DONE
 fi
