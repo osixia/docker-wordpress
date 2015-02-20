@@ -7,7 +7,7 @@ FIRST_START_DONE="/etc/docker-wordpress-first-start-done"
 if [ ! -e "$FIRST_START_DONE" ]; then
   
   # create wordpress vhost
-  if [ "$HTTPS" == "True" ]; then
+  if [ "${HTTPS,,}" == "true" ]; then
 
     # check certificat and key or create it
     /sbin/ssl-kit "/osixia/wordpress/apache2/$SSL_CRT_FILENAME" "/osixia/wordpress/apache2/$SSL_KEY_FILENAME"
