@@ -2,8 +2,8 @@ FROM osixia/baseimage:0.10.2
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Wordpress version
-ENV WORDPRESS_VERSION 4.1
-ENV WORDPRESS_SHA1 f0437c96ae3d8acaba3579566f1346f4cd06468e
+ENV WORDPRESS_VERSION 4.1.1
+ENV WORDPRESS_SHA1 15d38fe6c73121a20e63ccd8070153b89b2de6a9
 
 # Set correct environment variables.
 ENV HOME /root
