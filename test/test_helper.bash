@@ -10,24 +10,24 @@ build_image() {
 
 run_image() {
   CONTAINER_ID=$(docker run $@ -d $IMAGE_NAME)
-  CONTAINER_IP=$(get_container_ip $CONTAINER_ID)
+  CONTAINER_IP=$(get_container_ip_by_cid $CONTAINER_ID)
 }
 
 start_container() {
-  start_container_by_cid $CONTAINER_ID
+  start_containers_by_cid $CONTAINER_ID
 }
 
 stop_container() {
-  stop_container_by_cid $CONTAINER_ID
+  stop_containers_by_cid $CONTAINER_ID
 }
 
 remove_container() {
- remove_container_by_cid $CONTAINER_ID
+ remove_containers_by_cid $CONTAINER_ID
 }
 
 clear_container() {
-  stop_container_by_cid $CONTAINER_ID
-  remove_container_by_cid $CONTAINER_ID
+  stop_containers_by_cid $CONTAINER_ID
+  remove_containers_by_cid $CONTAINER_ID
 }
 
 is_service_running() {
@@ -40,32 +40,38 @@ wait_service() {
 
 
 # generic functions 
-get_container_ip() {
-   local IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" $1)
-   echo "$IP"
+get_container_ip_by_cid() {
+  local IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" $1)
+  echo "$IP"
 }
 
-start_container_by_cid() {
-  #disable outputs
-  docker start $1 &> /dev/null
-}
-
-stop_container_by_cid() {
-  #disable outputs
-  docker stop $1 &> /dev/null
-}
-
-remove_container_by_cid() {
-  #disable outputs
- docker rm $1 &> /dev/null
-}
-
-clear_container_by_cid() {
+start_containers_by_cid() {
   for cid in "$@"
   do
-    stop_container_by_cid $cid
-    remove_container_by_cid $cid
-  done
+    #disable outputs
+    docker start $cid &> /dev/null
+  done 
+}
+
+stop_containers_by_cid() {
+  for cid in "$@"
+  do
+    #disable outputs
+    docker stop $cid &> /dev/null
+  done 
+}
+
+remove_containers_by_cid() {
+  for cid in "$@"
+  do
+    #disable outputs
+    docker rm $cid &> /dev/null
+  done 
+}
+
+clear_containers_by_cid() {
+  stop_containers_by_cid $@
+  remove_containers_by_cid $@
 }
 
 is_service_running_by_cid() {
@@ -77,7 +83,7 @@ wait_service_by_cid() {
   cid=$1
 
   # first wait image init end
-  while ! is_service_running syslog-ng
+  while ! is_service_running_by_cid $cid syslog-ng
   do
     sleep 1
   done
