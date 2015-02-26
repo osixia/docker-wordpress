@@ -77,7 +77,7 @@ load test_helper
   clear_containers_by_cid $DB_CID
 
   UNAME=$(sed -e 's#.*/\(\)#\1#' <<< "$HOME") || true
-  chown -R $UNAME:$UNAME $BATS_TEST_DIRNAME/database || true
+  chown -R $UNAME:$UNAME $BATS_TEST_DIRNAME || true
 
   [ "$status" -eq 0 ]
   [ "$output" = "3" ]
