@@ -25,7 +25,7 @@ ADD service/install.sh /tmp/install.sh
 ADD service/wordpress/assets /osixia/wordpress
 
 # Run install script and clean all
-RUN ./tmp/install.sh && rm /tmp/install.sh \
+RUN ./tmp/install.sh \
 	&& rm wordpress.tar.gz \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

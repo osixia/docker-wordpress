@@ -19,4 +19,3 @@ release: build test tag_latest
 	@if ! head -n 1 CHANGELOG.md | grep -q 'release date'; then echo 'Please note the release date in CHANGELOG.md.' && false; fi
 	docker push $(NAME)
 	@echo "*** Don't forget to run 'twgit release/hotfix finish' :)"
-
