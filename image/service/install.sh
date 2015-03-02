@@ -13,20 +13,17 @@ rm -rf /var/www/html
 a2enmod rewrite
 
 # install plugins and themes
-mv /osixia/wordpress/wp-content/plugins/* /var/www/wordpress/wp-content/plugins
-mv /osixia/wordpress/wp-content/themes/* /var/www/wordpress/wp-content/themes
-
-# Move wp-config.php 
-mv /var/www/wordpress/wp-config-sample.php /var/www/wp-config.php
+mv /osixia/wordpress/wp-content/plugins/* /var/www/wordpress_bootstrap/wp-content/plugins
+mv /osixia/wordpress/wp-content/themes/* /var/www/wordpress_bootstrap/wp-content/themes
 
 # Disable file edit
-echo "define('DISALLOW_FILE_EDIT',true);" >> /var/www/wp-config.php 
+echo "define('DISALLOW_FILE_EDIT',true);" >> /var/www/wordpress_bootstrap/wp-config-sample.php
 
 # Disable auto update
-echo "add_filter('automatic_updater_disabled', '__return_true');" >> /var/www/wp-config.php
+echo "add_filter('automatic_updater_disabled', '__return_true');" >> /var/www/wordpress_bootstrap/wp-config-sample.php
 
 # Replace login errors with a less precise text
-echo "add_filter('login_errors', create_function('$no_login_error', \"return 'Bad credentials';\"));" >> /var/www/wp-config.php
+echo "add_filter('login_errors', create_function('$no_login_error', \"return 'Bad credentials';\"));" >> /var/www/wordpress_bootstrap/wp-config-sample.php
 
 # Add .htaccess
-cp /osixia/wordpress/apache2/.htaccess /var/www/wordpress/.htaccess
+cp /osixia/wordpress/apache2/.htaccess /var/www/wordpress_bootstrap/.htaccess
