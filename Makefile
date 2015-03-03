@@ -1,5 +1,5 @@
 NAME = osixia/wordpress
-VERSION = 0.1.1
+VERSION = 0.1.2
 
 .PHONY: all build test tag_latest release
 
