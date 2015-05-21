@@ -13,8 +13,7 @@ rm -rf /var/www/html
 a2enmod rewrite
 
 # install plugins and themes
-mv /osixia/wordpress/wp-content/plugins/* /var/www/wordpress_bootstrap/wp-content/plugins
-mv /osixia/wordpress/wp-content/themes/* /var/www/wordpress_bootstrap/wp-content/themes
+cp /osixia/wordpress/wp-content/* /var/www/wordpress_bootstrap/wp-content
 
 # Disable file edit
 echo "define('DISALLOW_FILE_EDIT',true);" >> /var/www/wordpress_bootstrap/wp-config-sample.php

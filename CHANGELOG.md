@@ -1,3 +1,6 @@
+## 0.1.3 (release date: 2015-05-21)
+  - Add wp-content
+
 ## 0.1.2 (release date: 2015-03-03)
   - Fix bootstrap config
 
