@@ -29,7 +29,7 @@ if [ ! -e "$FIRST_START_DONE" ]; then
     cp -R /var/www/wordpress_bootstrap/* /var/www/wordpress/sources
     rm -rf /var/www/wordpress_bootstrap
 
-    # Move wp-config.php 
+    # Move wp-config.php
     mv /var/www/wordpress/sources/wp-config-sample.php /var/www/wordpress/wp-config.php
 
     # set new install default theme
@@ -53,18 +53,18 @@ if [ ! -e "$FIRST_START_DONE" ]; then
     for key in ${toSalt[*]}
     do
       get_salt
-      sed -i "s/define('${key}', *'[^']*'/define('${key}', '${salt}'/g" /var/www/wordpress/wp-config.php 
+      sed -i "s/define('${key}', *'[^']*'/define('${key}', '${salt}'/g" /var/www/wordpress/wp-config.php
     done
 
-  fi 
-
-  # Fix file permission
-  find /var/www/ -type d -exec chmod 755 {} \;
-  find /var/www/ -type f -exec chmod 644 {} \;
-  chmod 400 /var/www/wordpress/wp-config.php
-  chown www-data:www-data -R /var/www
+  fi
 
   touch $FIRST_START_DONE
 fi
+
+# Fix file permission
+find /var/www/ -type d -exec chmod 755 {} \;
+find /var/www/ -type f -exec chmod 644 {} \;
+chmod 400 /var/www/wordpress/wp-config.php
+chown www-data:www-data -R /var/www
 
 exit 0
