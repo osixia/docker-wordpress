@@ -22,10 +22,12 @@ RUN apt-get update \
 		 php-apc \
 		 php5-mcrypt \
 		 php5-gd \
+		 curl \
 	&& curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
 	&& echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c - \
 	&& mkdir -p /var/www/wordpress_bootstrap /var/www/wordpress \
-	&& tar -xzf wordpress.tar.gz --strip 1 -C /var/www/wordpress_bootstrap
+	&& tar -xzf wordpress.tar.gz --strip 1 -C /var/www/wordpress_bootstrap \
+	&& apt-get remove -y --purge --auto-remove curl
 
 # Add service directory to /container/service
 ADD service /container/service
