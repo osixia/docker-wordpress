@@ -40,9 +40,6 @@ RUN /container/tool/install-service \
 # Add default env variables
 ADD env.yaml /container/environment/env.yaml
 
-# Add Wordpress container start config
-ADD service/wordpress/container-start.sh /etc/my_init.d/wordpress
-
 # Set wordpress data directory in a data volume
 VOLUME ["/var/www/wordpress"]
 
