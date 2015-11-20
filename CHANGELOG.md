@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.1.3
-  - Use baseimage: web-baseimage:0.1.5
+  - Use baseimage: web-baseimage:0.1.6
   - Add wp-content
 
 ## 0.1.2
