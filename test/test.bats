@@ -60,7 +60,7 @@ load test_helper
   tmp_file="$BATS_TMPDIR/docker-test"
 
   # we start a new mariadb container
-  DB_CID=$(docker run -v $BATS_TEST_DIRNAME/database:/var/lib/mysql -d osixia/mariadb:0.2.2)
+  DB_CID=$(docker run -v $BATS_TEST_DIRNAME/database:/var/lib/mysql -d osixia/mariadb:0.2.7)
   DB_IP=$(get_container_ip_by_cid $DB_CID)
 
   # we start the wordpress container and set DB_HOST
