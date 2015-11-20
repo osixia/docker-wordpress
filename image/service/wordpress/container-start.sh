@@ -10,11 +10,11 @@ if [ ! -e "$FIRST_START_DONE" ]; then
   if [ "${HTTPS,,}" == "true" ]; then
 
     # check certificat and key or create it
-    /sbin/ssl-helper "/osixia/wordpress/apache2/certs/$SSL_CRT_FILENAME" "/osixia/wordpress/apache2/certs/$SSL_KEY_FILENAME"
+    /sbin/ssl-helper "/container/service/wordpress/assets/apache2/certs/$SSL_CRT_FILENAME" "/container/service/wordpress/assets/apache2/certs/$SSL_KEY_FILENAME"
 
     # add CA certificat config if CA cert exists
-    if [ -e "/osixia/wordpress/apache2/certs/$SSL_CA_CRT_FILENAME" ]; then
-      sed -i "s/#SSLCACertificateFile/SSLCACertificateFile/g" /osixia/wordpress/apache2/wordpress-ssl.conf
+    if [ -e "/container/service/wordpress/assets/apache2/certs/$SSL_CA_CRT_FILENAME" ]; then
+      sed -i "s/#SSLCACertificateFile/SSLCACertificateFile/g" /container/service/wordpress/assets/apache2/wordpress-ssl.conf
     fi
 
     a2ensite wordpress-ssl
