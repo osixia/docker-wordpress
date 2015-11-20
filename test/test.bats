@@ -11,7 +11,7 @@ load test_helper
 @test "http response" {
 
   tmp_file="$BATS_TMPDIR/docker-test"
-  
+
   run_image
   wait_service apache2 php5-fpm
   curl --silent --insecure https://$CONTAINER_IP >> $tmp_file
@@ -27,9 +27,9 @@ load test_helper
 @test "http response with new database" {
 
   tmp_file="$BATS_TMPDIR/docker-test"
-  
+
   # we start a new mariadb container
-  DB_CID=$(docker run -e ROOT_ALLOWED_NETWORKS="['172.17.%.%', 'localhost', '127.0.0.1', '::1']" -d osixia/mariadb:0.2.4)
+  DB_CID=$(docker run -e ROOT_ALLOWED_NETWORKS="['172.17.%.%', 'localhost', '127.0.0.1', '::1']" -d osixia/mariadb:0.2.7)
   DB_IP=$(get_container_ip_by_cid $DB_CID)
 
   # we start the wordpress container and set DB_HOST
@@ -56,9 +56,9 @@ load test_helper
 }
 
 @test "http response with existing database" {
- 
+
   tmp_file="$BATS_TMPDIR/docker-test"
-  
+
   # we start a new mariadb container
   DB_CID=$(docker run -v $BATS_TEST_DIRNAME/database:/var/lib/mysql -d osixia/mariadb:0.2.2)
   DB_IP=$(get_container_ip_by_cid $DB_CID)
