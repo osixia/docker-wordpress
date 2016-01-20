@@ -1,8 +1,9 @@
 # Changelog
 
 ## 0.1.3
-  - Use baseimage: web-baseimage:0.1.6
+  - Use baseimage: web-baseimage:0.1.8
   - Add wp-content
+  - Wordpress 4.4.1
 
 ## 0.1.2
   - Fix bootstrap config

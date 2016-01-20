@@ -1,10 +1,6 @@
 #!/bin/bash -e
 # this script is run during the image build
 
-# Add wordpress virtualhosts
-ln -s /container/service/wordpress/assets/apache2/wordpress.conf /etc/apache2/sites-available/wordpress.conf
-ln -s /container/service/wordpress/assets/apache2/wordpress-ssl.conf /etc/apache2/sites-available/wordpress-ssl.conf
-
 # Remove apache default host
 a2dissite 000-default
 rm -rf /var/www/html
