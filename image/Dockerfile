@@ -12,7 +12,7 @@ ENV WORDPRESS_SHA1 89bcc67a33aecb691e879c818d7e2299701f30e7
 # Download, check integrity and unzip wordpress to /var/www/wordpress_bootstrap,
 RUN apt-get update \
 	&& /container/tool/add-multiple-process-stack \
-	&& /container/tool/add-service-available :apache2 :php5-fpm :cfssl \
+	&& /container/tool/add-service-available :apache2 :php5-fpm :ssl-tools \
 	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 		 ca-certificates \
 		 curl \
