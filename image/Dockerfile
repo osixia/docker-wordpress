@@ -1,4 +1,4 @@
-FROM osixia/web-baseimage:0.1.9
+FROM osixia/web-baseimage:0.1.11
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Wordpress version
