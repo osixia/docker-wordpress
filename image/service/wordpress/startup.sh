@@ -24,7 +24,7 @@ if [ ! -e "$FIRST_START_DONE" ]; then
   fi
 
   # wordpress directory is empty, we use the bootstrap
-  if [ ! "$(ls -A /var/www/wordpress)" ]; then
+  if [ ! "$(ls -A -I lost+found /var/www/wordpress)" ]; then
     mkdir -p /var/www/wordpress/sources
     cp -R /var/www/wordpress_bootstrap/* /var/www/wordpress/sources
     rm -rf /var/www/wordpress_bootstrap
