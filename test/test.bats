@@ -13,7 +13,7 @@ load test_helper
   tmp_file="$BATS_TMPDIR/docker-test"
 
   run_image
-  wait_service apache2 php5-fpm
+  wait_process apache2 php5-fpm
   curl --silent --insecure https://$CONTAINER_IP >> $tmp_file
   run grep -c "Error establishing a database connection" $tmp_file
   rm $tmp_file
@@ -36,12 +36,12 @@ load test_helper
   run_image -e DB_HOST=$DB_IP
 
   # add default wordpress database and user (must match env.yml)
-  wait_service_by_cid $DB_CID mysqld
+  wait_process_by_cid $DB_CID mysqld
   docker exec $DB_CID mysql -u admin -padmin mysql -u admin -padmin -e "CREATE DATABASE wordpress;"
   docker exec $DB_CID mysql -u admin -padmin mysql -u admin -padmin -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wp-user'@'172.17.%.%' IDENTIFIED BY 'wp-password' WITH GRANT OPTION ;"
 
   # wait wordpress container apache2 service
-  wait_service apache2 php5-fpm
+  wait_process apache2 php5-fpm
   curl -L --silent --insecure https://$CONTAINER_IP >> $tmp_file
   run grep -c ">WordPress<" $tmp_file
   rm $tmp_file
@@ -67,7 +67,7 @@ load test_helper
   run_image -e DB_HOST=$DB_IP
 
   # wait wordpress container apache2 service
-  wait_service apache2 php5-fpm
+  wait_process apache2 php5-fpm
   curl -L --silent --insecure https://$CONTAINER_IP >> $tmp_file
   run grep -c "Osixia Docker Wordpress !" $tmp_file
   rm $tmp_file
