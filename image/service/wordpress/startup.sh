@@ -10,7 +10,7 @@ if [ ! -e "$FIRST_START_DONE" ]; then
   if [ "${HTTPS,,}" == "true" ]; then
 
     # check certificat and key or create it
-    /sbin/ssl-helper "/container/service/wordpress/assets/apache2/certs/$SSL_CRT_FILENAME" "/container/service/wordpress/assets/apache2/certs/$SSL_KEY_FILENAME"
+    ssl-helper wordpress "/container/service/wordpress/assets/apache2/certs/$SSL_CRT_FILENAME" "/container/service/wordpress/assets/apache2/certs/$SSL_KEY_FILENAME" "/container/service/wordpress/assets/apache2/certs/$SSL_CA_CRT_FILENAME"
 
     # add CA certificat config if CA cert exists
     if [ -e "/container/service/wordpress/assets/apache2/certs/$SSL_CA_CRT_FILENAME" ]; then
