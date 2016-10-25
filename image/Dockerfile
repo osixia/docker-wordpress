@@ -2,8 +2,8 @@ FROM osixia/web-baseimage:0.1.11
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Wordpress version
-ENV WORDPRESS_VERSION 4.4.1
-ENV WORDPRESS_SHA1 89bcc67a33aecb691e879c818d7e2299701f30e7
+ENV WORDPRESS_VERSION 4.6.1
+ENV WORDPRESS_SHA1 1134829da25e4ac99ceccb37d78a208cc608e92f
 
 # Install apache2 and php5-fpm using osixia/baseimage utils
 # Caution: /sbin/enable-service arguments order is important
