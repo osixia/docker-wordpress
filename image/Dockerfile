@@ -3,7 +3,7 @@ MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Wordpress version
 ENV WORDPRESS_VERSION 4.6.1
-ENV WORDPRESS_SHA1 1134829da25e4ac99ceccb37d78a208cc608e92f
+ENV WORDPRESS_SHA1 027e065d30a64720624a7404a1820e6c6fff1202
 
 # Install apache2 and php5-fpm using osixia/baseimage utils
 # Caution: /sbin/enable-service arguments order is important
