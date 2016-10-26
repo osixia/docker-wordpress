@@ -1,9 +1,10 @@
 # Changelog
 
 ## 0.1.3
-  - Use baseimage: web-baseimage:0.1.11
-  - Add wp-content
+  - Use baseimage: web-baseimage:0.1.12
+  - Add wp-content and authldap plugin
   - Wordpress 4.6.1
+  - Add ldap tls config
 
 ## 0.1.2
   - Fix bootstrap config

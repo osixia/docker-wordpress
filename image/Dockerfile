@@ -1,4 +1,4 @@
-FROM osixia/web-baseimage:0.1.11
+FROM osixia/web-baseimage:0.1.12
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Wordpress version
@@ -16,10 +16,11 @@ RUN apt-get update \
 	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 		 ca-certificates \
 		 curl \
+		 php-apc \
 		 php5-gd \
 		 php5-mcrypt \
 		 php5-mysql \
-		 php-apc \
+		 php5-ldap \
 	&& curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
 	&& echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c - \
 	&& mkdir -p /var/www/wordpress_bootstrap /var/www/wordpress \
