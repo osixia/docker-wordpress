@@ -17,6 +17,7 @@ backupFilePath="$backupPath/$(date "$dateFileFormat")$backupFileSuffix"
 
 # save config and plugins except default ones
 tar -czf $backupFilePath -C / var/www/wordpress
+chmod 600 $backupFilePath
 
 # backup database
 . /container/service/backup/assets/tool/wordpress-get-db-params
@@ -26,6 +27,7 @@ mysqldump -u $databaseUser -p$databasePassword --host $host $database > $databas
 
 backupFilePath="$backupPath/$(date "$dateFileFormat")$backupDbSuffix"
 tar -czf $backupFilePath $databaseFile
+chmod 600 $backupFilePath
 
 rm -rf $databaseFile
 
