@@ -5,9 +5,21 @@ MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 ENV WORDPRESS_VERSION 4.6.1
 ENV WORDPRESS_SHA1 027e065d30a64720624a7404a1820e6c6fff1202
 
+# MariaDB version
+ENV MARIADB_MAJOR 10.1
+
 # Install apache2 and php5-fpm using osixia/baseimage utils
-# Caution: /sbin/enable-service arguments order is important
+# Caution: /container/tool/install-service-available arguments order is important
 # php5-fpm install will detect apache2 and configure it
+
+# Add MariaDB repository
+RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db \
+    && echo "deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/$MARIADB_MAJOR/debian jessie main" > /etc/apt/sources.list.d/mariadb.list \
+    && { \
+		     echo 'Package: *'; \
+		     echo 'Pin: release o=MariaDB'; \
+		     echo 'Pin-Priority: 999'; \
+	     } > /etc/apt/preferences.d/mariadb
 
 # Download, check integrity and unzip wordpress to /var/www/wordpress_bootstrap,
 RUN apt-get update \
@@ -16,6 +28,7 @@ RUN apt-get update \
 	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 		 ca-certificates \
 		 curl \
+		 mariadb-client-$MARIADB_MAJOR \
 		 php-apc \
 		 php5-gd \
 		 php5-mcrypt \
@@ -41,7 +54,7 @@ RUN /container/tool/install-service \
 ADD environment /container/environment/99-default
 
 # Set wordpress data directory in a data volume
-VOLUME ["/var/www/wordpress"]
+VOLUME ["/var/www/wordpress", "/data/backup"]
 
 # Expose http and https default ports
 EXPOSE 80 443

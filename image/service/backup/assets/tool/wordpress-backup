@@ -1,0 +1,32 @@
+#!/bin/bash -e
+
+# Usage: /sbin/wordpress-backup
+backupPath="/data/backup"
+backupFileSuffix="-wordpress.tar.gz"
+backupDbSuffix="-wordpress-db.tar.gz"
+databaseFile="database.sql"
+
+source /container/run/environment.sh
+
+# delete backups that are over $WORDPRESS_BACKUP_TTL days
+find $backupPath -type f -mtime +$WORDPRESS_BACKUP_TTL -exec rm {} \;
+
+# date format for the dump file name
+dateFileFormat="+%Y%m%dT%H%M%S"
+backupFilePath="$backupPath/$(date "$dateFileFormat")$backupFileSuffix"
+
+# save config and plugins except default ones
+tar -czf $backupFilePath -C / var/www/wordpress
+
+# backup database
+. /container/service/backup/assets/tool/wordpress-get-db-params
+rm -rf $databaseFile || true
+
+mysqldump -u $databaseUser -p$databasePassword --host $host $database > $databaseFile
+
+backupFilePath="$backupPath/$(date "$dateFileFormat")$backupDbSuffix"
+tar -czf $backupFilePath $databaseFile
+
+rm -rf $databaseFile
+
+exit 0
