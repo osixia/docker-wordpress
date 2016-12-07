@@ -3,7 +3,7 @@
 ## 0.1.3
   - Use baseimage: web-baseimage:0.1.12
   - Add wp-content and authldap plugin
-  - Wordpress 4.6.1
+  - Wordpress 4.7.0
   - Add ldap tls config
 
 ## 0.1.2
