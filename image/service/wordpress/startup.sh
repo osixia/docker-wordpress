@@ -45,10 +45,10 @@ if [ ! "$(ls -A -I lost+found /var/www/wordpress)" ]; then
   cp -R /var/www/wordpress_bootstrap/* /var/www/wordpress
   rm -rf /var/www/wordpress_bootstrap
 
-  # Install plugins and themes
-  cp -R ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-content/. /var/www/wordpress/wp-content
-
 fi
+
+# Install plugins and themes
+cp -Rf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-content/. /var/www/wordpress/wp-content
 
 # if there is no config
 if [ ! -e "/var/www/wordpress/wp-config.php" ] && [ -e "${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-config.php" ]; then
