@@ -53,8 +53,8 @@ RUN /container/tool/install-service \
 # Add default env variables
 ADD environment /container/environment/99-default
 
-# Set wordpress data directory in a data volume
-VOLUME ["/var/www/wordpress", "/data/backup"]
+# To persists the container files add these directories to volumes
+# VOLUME ["/var/www/wordpress", "/data/backup"]
 
 # Expose http and https default ports
 EXPOSE 80 443
