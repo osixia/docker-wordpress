@@ -2,7 +2,7 @@ setup() {
   IMAGE_NAME="$NAME:$VERSION"
 }
 
-# function relative to the current container / image  
+# function relative to the current container / image
 build_image() {
   #disable outputs
   docker build -t $IMAGE_NAME $BATS_TEST_DIRNAME/../image &> /dev/null
@@ -30,16 +30,11 @@ clear_container() {
   remove_containers_by_cid $CONTAINER_ID
 }
 
-is_service_running() {
-  is_service_running_by_cid $CONTAINER_ID $1
+wait_process() {
+  wait_process_by_cid $CONTAINER_ID $@
 }
 
-wait_service() {
-  wait_service_by_cid $CONTAINER_ID $@
-}
-
-
-# generic functions 
+# generic functions
 get_container_ip_by_cid() {
   local IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" $1)
   echo "$IP"
@@ -50,7 +45,7 @@ start_containers_by_cid() {
   do
     #disable outputs
     docker start $cid &> /dev/null
-  done 
+  done
 }
 
 stop_containers_by_cid() {
@@ -58,7 +53,7 @@ stop_containers_by_cid() {
   do
     #disable outputs
     docker stop $cid &> /dev/null
-  done 
+  done
 }
 
 remove_containers_by_cid() {
@@ -66,7 +61,7 @@ remove_containers_by_cid() {
   do
     #disable outputs
     docker rm $cid &> /dev/null
-  done 
+  done
 }
 
 clear_containers_by_cid() {
@@ -74,28 +69,7 @@ clear_containers_by_cid() {
   remove_containers_by_cid $@
 }
 
-is_service_running_by_cid() {
-  docker exec $1 ps cax | grep $2  > /dev/null
-}
-
-wait_service_by_cid() {
-
+wait_process_by_cid() {
   cid=$1
-
-  # first wait image init end
-  while ! is_service_running_by_cid $cid syslog-ng
-  do
-    sleep 1
-  done
-
-  for service in "${@:2}"
-  do
-    # wait service
-    while ! is_service_running_by_cid $cid $service
-    do
-      sleep 1
-    done
-  done
-
-  sleep 5
+  docker exec $cid /container/tool/wait-process ${@:2}
 }

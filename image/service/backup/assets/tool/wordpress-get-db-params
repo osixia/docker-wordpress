@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+# get database name, user and password from configuration
+# /!\ configuration must use simple quote :)
+# and it's a bad idea to have ' in your username, password and database name
+host=$(sed -n "s/\s*define\s*(\s*'DB_HOST'\s*,\s*'\(.*\)'.*/\1/p" /var/www/wordpress/wp-config.php)
+databaseUser=$(sed -n "s/\s*define\s*(\s*'DB_USER'\s*,\s*'\(.*\)'.*/\1/p" /var/www/wordpress/wp-config.php)
+databasePassword=$(sed -n "s/\s*define\s*(\s*'DB_PASSWORD'\s*,\s*'\(.*\)'.*/\1/p" /var/www/wordpress/wp-config.php)
+database=$(sed -n "s/\s*define\s*(\s*'DB_NAME'\s*,\s*'\(.*\)'.*/\1/p" /var/www/wordpress/wp-config.php)
