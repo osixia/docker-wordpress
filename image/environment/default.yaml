@@ -1,0 +1,34 @@
+WORDPRESS_BACKUP_CRON_EXP: 30 4 * * * #every day at 4:30am
+WORDPRESS_BACKUP_TTL: 15 # Delete backups that are over 15 days
+
+WORDPRESS_SERVER_NAME: example.org
+WORDPRESS_SERVER_ADMIN: webmaster@example.org
+WORDPRESS_SERVER_PATH: /blog
+
+# Self signed certificat will be generated
+# if HTTPS is set to true and no certificat and key are provided.
+
+# To use your custom certificat and key 2 options :
+# - add them in service/wordpress/assets/apache2/ssl and build the image
+# - or during docker run mount a data volume with those files to /container/service/wordpress/assets/apache2/certs
+WORDPRESS_HTTPS: true
+WORDPRESS_SSL_CRT_FILENAME: wordpress.crt
+WORDPRESS_SSL_KEY_FILENAME: wordpress.key
+WORDPRESS_SSL_CA_CRT_FILENAME: ca.crt
+
+# New install default theme
+# (leave empty to use default wordpress theme)
+WORDPRESS_DEFAULT_THEME:
+
+# LDAP client tls config
+WORDPRESS_LDAP_CLIENT_TLS: true
+WORDPRESS_LDAP_CLIENT_TLS_REQCERT: demand
+WORDPRESS_LDAP_CLIENT_TLS_CA_CRT_FILENAME: ldap-ca.crt
+WORDPRESS_LDAP_CLIENT_TLS_CRT_FILENAME: ldap-client.crt
+WORDPRESS_LDAP_CLIENT_TLS_KEY_FILENAME: ldap-client.key
+
+
+WORDPRESS_SSL_HELPER_PREFIX: wordpress
+LDAP_CLIENT_SSL_HELPER_PREFIX: ldap
+
+SSL_HELPER_AUTO_RENEW_SERVICES_IMPACTED: :apache2 :php5-fpm

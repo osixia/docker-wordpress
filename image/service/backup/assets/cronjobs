@@ -1,0 +1,3 @@
+# Backup mail directory
+{{ WORDPRESS_BACKUP_CRON_EXP }} root /sbin/wordpress-backup 2>&1 | /usr/bin/logger -s -t wordpress-backup
+# empty line
