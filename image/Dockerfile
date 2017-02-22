@@ -2,8 +2,8 @@ FROM osixia/web-baseimage:0.1.12
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Wordpress version
-ENV WORDPRESS_VERSION 4.7.1
-ENV WORDPRESS_SHA1 8e56ba56c10a3f245c616b13e46bd996f63793d6
+ENV WORDPRESS_VERSION 4.7.2
+ENV WORDPRESS_SHA1 7b687f1af589c337124e6247229af209ec1d52c3
 
 # MariaDB version
 ENV MARIADB_MAJOR 10.1
@@ -53,7 +53,7 @@ RUN /container/tool/install-service \
 # Add default env variables
 ADD environment /container/environment/99-default
 
-# To persists the container files add these directories to volumes
+# To persist the container files add these directories to volumes
 # VOLUME ["/var/www/wordpress", "/data/backup"]
 
 # Expose http and https default ports

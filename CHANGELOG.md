@@ -1,9 +1,9 @@
 # Changelog
 
-## 0.1.3
+## 4.7.2
   - Use baseimage: web-baseimage:0.1.12
   - Add wp-content
-  - Wordpress 4.7.1
+  - Wordpress 4.7.2
   - Add ldap tls config
 
 ## 0.1.2

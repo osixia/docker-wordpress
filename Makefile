@@ -1,5 +1,5 @@
 NAME = osixia/wordpress
-VERSION = 0.1.3
+VERSION = 4.7.2
 
 .PHONY: all build build-nocache test tag_latest release
 
