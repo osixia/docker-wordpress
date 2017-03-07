@@ -54,7 +54,7 @@ cp -Rf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-content/. /var/www/wordpress
 if [ ! -e "/var/www/wordpress/wp-config.php" ] && [ -e "${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-config.php" ]; then
 
     log-helper debug "link ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-config.php to /var/www/wordpress/wp-config.php"
-    ln -sf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-config.php to /var/www/wordpress/wp-config.php
+    ln -sf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-config.php /var/www/wordpress/wp-config.php
 
 fi
 
@@ -62,7 +62,7 @@ fi
 if [ ! -e "$FIRST_START_DONE" ]; then
 
   # Add .htaccess
-  cp -f ${CONTAINER_SERVICE_DIR}/wordpress/assets/apache2/.htaccess /var/www/wordpress/.htaccess
+  [ -e "/var/www/wordpress/.htaccess" ] || cp -f ${CONTAINER_SERVICE_DIR}/wordpress/assets/apache2/.htaccess /var/www/wordpress/.htaccess
 
   # set new install default theme
   if [ -n "$WORDPRESS_DEFAULT_THEME" ]; then

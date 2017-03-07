@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.7.3
+  - Wordpress 4.7.3
+  - Fix startup.sh wp-config.php link
+  - Fix .htaccess overwrite
+
 ## 4.7.2
   - Use baseimage: web-baseimage:1.0.0
   - Add wp-content
