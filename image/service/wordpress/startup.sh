@@ -62,7 +62,7 @@ fi
 if [ ! -e "$FIRST_START_DONE" ]; then
 
   # Add .htaccess
-  cp -f ${CONTAINER_SERVICE_DIR}/wordpress/assets/apache2/.htaccess /var/www/wordpress/.htaccess
+  [ -e "/var/www/wordpress/.htaccess" ] || cp -f ${CONTAINER_SERVICE_DIR}/wordpress/assets/apache2/.htaccess /var/www/wordpress/.htaccess
 
   # set new install default theme
   if [ -n "$WORDPRESS_DEFAULT_THEME" ]; then
