@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.7.2-1
+  - Fix startup.sh wp-config.php link
+
 ## 4.7.2
   - Use baseimage: web-baseimage:1.0.0
   - Add wp-content

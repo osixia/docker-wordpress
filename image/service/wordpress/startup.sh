@@ -54,7 +54,7 @@ cp -Rf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-content/. /var/www/wordpress
 if [ ! -e "/var/www/wordpress/wp-config.php" ] && [ -e "${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-config.php" ]; then
 
     log-helper debug "link ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-config.php to /var/www/wordpress/wp-config.php"
-    ln -sf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-config.php to /var/www/wordpress/wp-config.php
+    ln -sf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-config.php /var/www/wordpress/wp-config.php
 
 fi
 
