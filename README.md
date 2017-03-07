@@ -1,4 +1,4 @@
-# docker-wordpress (outdated)
+# docker-wordpress
 A docker image to run wordpress
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/osixia/wordpress.svg)][hub]
