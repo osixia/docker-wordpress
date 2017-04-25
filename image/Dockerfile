@@ -2,8 +2,8 @@ FROM osixia/web-baseimage:1.0.0
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Wordpress version
-ENV WORDPRESS_VERSION 4.7.3
-ENV WORDPRESS_SHA1 35adcd8162eae00d5bc37f35344fdc06b22ffc98
+ENV WORDPRESS_VERSION 4.7.4
+ENV WORDPRESS_SHA1 153592ccbb838cafa1220de9174ec965df2e9e1a
 
 # MariaDB version
 ENV MARIADB_MAJOR 10.1
