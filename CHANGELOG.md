@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.7.4
+  - Wordpress 4.7.4
+
 ## 4.7.3
   - Wordpress 4.7.3
   - Fix startup.sh wp-config.php link
