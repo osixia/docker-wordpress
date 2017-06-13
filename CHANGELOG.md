@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.8.0
+  - Wordpress 4.8
+
 ## 4.7.5
   - Wordpress 4.7.5
 
