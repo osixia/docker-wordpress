@@ -13,7 +13,7 @@ load test_helper
   tmp_file="$BATS_TMPDIR/docker-test"
 
   run_image
-  wait_process apache2 php5-fpm
+  wait_process apache2 php-fpm7.0
   curl -L --silent --insecure https://$CONTAINER_IP >> $tmp_file
   run grep -c "Setup Configuration File" $tmp_file
   rm $tmp_file
