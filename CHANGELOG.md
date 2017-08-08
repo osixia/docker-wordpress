@@ -3,6 +3,9 @@
 ## 4.8.1
   - Wordpress 4.8.1
 
+## 4.8.0-1
+  - Upgrade baseimage: web-baseimage:1.1.0 (debian stretch, php7)
+
 ## 4.8.0
   - Wordpress 4.8
 
