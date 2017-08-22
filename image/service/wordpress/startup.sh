@@ -43,12 +43,22 @@ if [ ! "$(ls -A -I lost+found /var/www/wordpress)" ]; then
 
   mkdir -p /var/www/wordpress
   cp -R /var/www/wordpress_bootstrap/* /var/www/wordpress
-  rm -rf /var/www/wordpress_bootstrap
+
+  if [ "${WORDPRESS_REMOVE_DEFAULT_THEMES}" = "true" ]; then
+    rm -rf /var/www/wordpress/wp-content/themes/*
+  fi
+
+  if [ "${WORDPRESS_REMOVE_DEFAULT_PLUGINS}" = "true" ]; then
+    rm -rf /var/www/wordpress/wp-content/plugins/*
+  fi
 
 fi
 
-# Install plugins and themes
-cp -Rf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-content/. /var/www/wordpress/wp-content
+# remove bootstrap directory
+rm -rf /var/www/wordpress_bootstrap
+
+# install plugins and themes
+cp --remove-destination -Rf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-content/. /var/www/wordpress/wp-content
 
 # if there is no config
 if [ ! -e "/var/www/wordpress/wp-config.php" ] && [ -e "${CONTAINER_SERVICE_DIR}/wordpress/assets/config/wp-config.php" ]; then

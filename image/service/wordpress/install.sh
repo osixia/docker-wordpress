@@ -10,4 +10,4 @@ a2dissite 000-default
 rm -rf /var/www/html
 
 # Add mod_rewrite apache module
-a2enmod rewrite
+a2enmod rewrite deflate expires
