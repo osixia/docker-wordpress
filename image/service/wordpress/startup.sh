@@ -79,6 +79,12 @@ if [ ! -e "$FIRST_START_DONE" ]; then
     sed -i "s/define( 'WP_DEFAULT_THEME', '[^']*'/define( 'WP_DEFAULT_THEME', '${WORDPRESS_DEFAULT_THEME}'/g" /var/www/wordpress/wp-includes/default-constants.php
   fi
 
+  cp -f ${CONTAINER_SERVICE_DIR}/wordpress/assets/php7.0-fpm/opcache.ini /etc/php/7.0/fpm/conf.d/opcache.ini
+
+  if [ "${WORDPRESS_PRODUCTION}" = "true" ]; then
+    sed -i "s/;opcache.validate_timestamps/opcache.validate_timestamps/g" /etc/php/7.0/fpm/conf.d/opcache.ini
+  fi
+
   touch $FIRST_START_DONE
 fi
 

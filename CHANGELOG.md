@@ -4,6 +4,8 @@
   - Wordpress 4.8.1
   - Add WORDPRESS_REMOVE_DEFAULT_THEMES and WORDPRESS_REMOVE_DEFAULT_PLUGINS environment variables
   - Optimise apache config
+  - Add opcache config
+  - Add WORDPRESS_PRODUCTION environment variable
 
 ## 4.8.0-1
   - Upgrade baseimage: web-baseimage:1.1.0 (debian stretch, php7)
