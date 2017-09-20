@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.8.2
+  - Wordpress 4.8.2
+
 ## 4.8.1
   - Wordpress 4.8.1
   - Add WORDPRESS_REMOVE_DEFAULT_THEMES and WORDPRESS_REMOVE_DEFAULT_PLUGINS environment variables
