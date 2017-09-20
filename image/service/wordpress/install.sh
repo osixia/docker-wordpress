@@ -9,5 +9,5 @@ log-helper level eq trace && set -x
 a2dissite 000-default
 rm -rf /var/www/html
 
-# Add mod_rewrite apache module
-a2enmod rewrite
+# Add apache modules
+a2enmod rewrite deflate expires

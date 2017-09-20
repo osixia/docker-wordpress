@@ -43,12 +43,22 @@ if [ ! "$(ls -A -I lost+found /var/www/wordpress)" ]; then
 
   mkdir -p /var/www/wordpress
   cp -R /var/www/wordpress_bootstrap/* /var/www/wordpress
-  rm -rf /var/www/wordpress_bootstrap
+
+  if [ "${WORDPRESS_REMOVE_DEFAULT_THEMES}" = "true" ]; then
+    rm -rf /var/www/wordpress/wp-content/themes/*
+  fi
+
+  if [ "${WORDPRESS_REMOVE_DEFAULT_PLUGINS}" = "true" ]; then
+    rm -rf /var/www/wordpress/wp-content/plugins/*
+  fi
 
 fi
 
-# Install plugins and themes
-cp -Rf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-content/. /var/www/wordpress/wp-content
+# remove bootstrap directory
+rm -rf /var/www/wordpress_bootstrap
+
+# install plugins and themes
+cp --remove-destination -Rf ${CONTAINER_SERVICE_DIR}/wordpress/assets/wp-content/. /var/www/wordpress/wp-content
 
 # if there is no config
 if [ ! -e "/var/www/wordpress/wp-config.php" ] && [ -e "${CONTAINER_SERVICE_DIR}/wordpress/assets/config/wp-config.php" ]; then
@@ -67,6 +77,12 @@ if [ ! -e "$FIRST_START_DONE" ]; then
   # set new install default theme
   if [ -n "$WORDPRESS_DEFAULT_THEME" ]; then
     sed -i "s/define( 'WP_DEFAULT_THEME', '[^']*'/define( 'WP_DEFAULT_THEME', '${WORDPRESS_DEFAULT_THEME}'/g" /var/www/wordpress/wp-includes/default-constants.php
+  fi
+
+  cp -f ${CONTAINER_SERVICE_DIR}/wordpress/assets/php7.0-fpm/opcache.ini /etc/php/7.0/fpm/conf.d/opcache.ini
+
+  if [ "${WORDPRESS_PRODUCTION}" = "true" ]; then
+    sed -i "s/;opcache.validate_timestamps/opcache.validate_timestamps/g" /etc/php/7.0/fpm/conf.d/opcache.ini
   fi
 
   touch $FIRST_START_DONE
