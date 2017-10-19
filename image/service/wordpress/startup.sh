@@ -32,6 +32,10 @@ else
   ln -sf ${CONTAINER_SERVICE_DIR}/wordpress/assets/apache2/http.conf /etc/apache2/sites-available/wordpress.conf
 fi
 
+if [ "${WORDPRESS_DISABLE_XMLRPC,,}" == "true" ]; then
+  sed -i --follow-symlinks "s/#disablexmlrpc//g" /etc/apache2/sites-available/wordpress.conf
+fi
+
 a2ensite wordpress | log-helper debug
 
 #

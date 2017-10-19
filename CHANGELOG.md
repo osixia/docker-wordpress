@@ -2,6 +2,7 @@
 
 ## 4.8.2
   - Wordpress 4.8.2
+  - Add WORDPRESS_DISABLE_XMLRPC environment variable
 
 ## 4.8.1
   - Wordpress 4.8.1
