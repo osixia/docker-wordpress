@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.8.2
+  - Wordpress 4.8.2
+  - Add WORDPRESS_DISABLE_XMLRPC environment variable
+  - Upgrade baseimage: web-baseimage:1.1.1
+
 ## 4.8.1
   - Wordpress 4.8.1
   - Add WORDPRESS_REMOVE_DEFAULT_THEMES and WORDPRESS_REMOVE_DEFAULT_PLUGINS environment variables

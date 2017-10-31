@@ -1,9 +1,9 @@
-FROM osixia/web-baseimage:1.1.0
+FROM osixia/web-baseimage:1.1.1
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Wordpress version
-ARG WORDPRESS_VERSION=4.8.1
-ARG WORDPRESS_SHA1=5376cf41403ae26d51ca55c32666ef68b10e35a4
+ARG WORDPRESS_VERSION=4.8.2
+ARG WORDPRESS_SHA1=a99115b3b6d6d7a1eb6c5617d4e8e704ed50f450
 
 # MariaDB version
 ARG MARIADB_MAJOR=10.2
