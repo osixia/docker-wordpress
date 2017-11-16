@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.8.3
+  - Wordpress 4.8.3
+
 ## 4.8.2
   - Wordpress 4.8.2
   - Add WORDPRESS_DISABLE_XMLRPC environment variable
