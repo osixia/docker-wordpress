@@ -6,4 +6,4 @@ A docker image to run wordpress
 
 [hub]: https://hub.docker.com/r/osixia/wordpress/
 
-Latest release: 4.8.3 - Wordpress 4.8.3 -  [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/osixia/wordpress) 
+Latest release: 4.9.0 - Wordpress 4.9 -  [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/osixia/wordpress) 
