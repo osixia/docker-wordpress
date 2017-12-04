@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.9.1
+  - Wordpress 4.9.1
+
 ## 4.9.0
   - Wordpress 4.9
 
