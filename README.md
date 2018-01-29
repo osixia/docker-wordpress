@@ -6,4 +6,18 @@ A docker image to run wordpress
 
 [hub]: https://hub.docker.com/r/osixia/wordpress/
 
-Latest release: 4.9.1 - Wordpress 4.9.1 -  [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/osixia/wordpress) 
+Latest release: 4.9.2 - Wordpress 4.9.2 -  [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/osixia/wordpress) 
+
+### Under the hood: osixia/web-baseimage
+
+This image is based on osixia/web-baseimage.
+More info: https://github.com/osixia/docker-web-baseimage
+
+## Security
+If you discover a security vulnerability within this docker image, please send an email to the Osixia! team at security@osixia.net. For minor vulnerabilities feel free to add an issue here on github.
+
+Please include as many details as possible.
+
+## Changelog
+
+Please refer to: [CHANGELOG.md](CHANGELOG.md)
