@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project follows Wordpress versioning.
 
-## [4.9.5] - 2018-02-07
+## [4.9.5] - 2018-04-05
 ### Changed
   - Upgrade Wordpress version to 4.9.5
 
