@@ -8,7 +8,7 @@ and this project follows Wordpress versioning.
 ### Changed
   - Upgrade Wordpress version to 4.9.6
 
-## [4.9.5] - 2018-02-07
+## [4.9.5] - 2018-04-05
 ### Changed
   - Upgrade Wordpress version to 4.9.5
 
@@ -94,7 +94,6 @@ and this project follows Wordpress versioning.
 ## 0.1.0 - 2015-02-23
 Initial release
 
-[4.9.6]: https://github.com/osixia/docker-wordpress/compare/v4.9.5...v4.9.6
 [4.9.5]: https://github.com/osixia/docker-wordpress/compare/v4.9.4...v4.9.5
 [4.9.4]: https://github.com/osixia/docker-wordpress/compare/v4.9.2...v4.9.4
 [4.9.2]: https://github.com/osixia/docker-wordpress/compare/v4.9.1...v4.9.2
