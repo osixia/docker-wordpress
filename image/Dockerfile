@@ -1,12 +1,11 @@
 FROM osixia/web-baseimage:1.1.1
-MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Wordpress version
-ARG WORDPRESS_VERSION=4.9.6
-ARG WORDPRESS_SHA1=40616b40d120c97205e5852c03096115c2fca537
+ARG WORDPRESS_VERSION=4.9.7
+ARG WORDPRESS_MD5=50efc5822bf550e9a526b9b9f4469b0d
 
 # MariaDB version
-ARG MARIADB_MAJOR=10.2
+ARG MARIADB_MAJOR=10.3
 
 # Install apache2 and php7.0-fpm using osixia/baseimage utils
 # Caution: /container/tool/install-service-available arguments order is important
@@ -35,7 +34,7 @@ RUN apt-get update \
   		 php7.0-mysql \
   		 php7.0-ldap \
   	&& curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
-  	&& echo "$WORDPRESS_SHA1 *wordpress.tar.gz" | sha1sum -c - \
+  	&& echo "$WORDPRESS_MD5 *wordpress.tar.gz" | md5sum -c - \
   	&& mkdir -p /var/www/wordpress_bootstrap /var/www/wordpress \
   	&& tar -xzf wordpress.tar.gz --strip 1 -C /var/www/wordpress_bootstrap \
   	&& apt-get remove -y --purge --auto-remove curl ca-certificates \
