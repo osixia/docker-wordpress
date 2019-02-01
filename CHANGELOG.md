@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project follows Wordpress versioning.
 
+## [5.0.3] - 2019-01-30
+### Changed
+  - Upgrade Wordpress version to 5.0.3
+
 ## [4.9.7] - 2018-07-28
 ### Changed
   - Upgrade Wordpress version to 4.9.7
@@ -98,6 +102,9 @@ and this project follows Wordpress versioning.
 ## 0.1.0 - 2015-02-23
 Initial release
 
+[5.0.3]: https://github.com/osixia/docker-wordpress/compare/v4.9.7...v5.0.3
+[4.9.7]: https://github.com/osixia/docker-wordpress/compare/v4.9.6...v4.9.7
+[4.9.6]: https://github.com/osixia/docker-wordpress/compare/v4.9.5...v4.9.6
 [4.9.5]: https://github.com/osixia/docker-wordpress/compare/v4.9.4...v4.9.5
 [4.9.4]: https://github.com/osixia/docker-wordpress/compare/v4.9.2...v4.9.4
 [4.9.2]: https://github.com/osixia/docker-wordpress/compare/v4.9.1...v4.9.2
