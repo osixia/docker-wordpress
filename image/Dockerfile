@@ -1,8 +1,8 @@
 FROM osixia/web-baseimage:1.1.1
 
 # Wordpress version
-ARG WORDPRESS_VERSION=4.9.7
-ARG WORDPRESS_MD5=50efc5822bf550e9a526b9b9f4469b0d
+ARG WORDPRESS_VERSION=5.0.3
+ARG WORDPRESS_MD5=83bec78836aabac08f769d50f1bffe5d
 
 # MariaDB version
 ARG MARIADB_MAJOR=10.3
@@ -12,7 +12,7 @@ ARG MARIADB_MAJOR=10.3
 # php7.0-fpm install will detect apache2 and configure it
 
 # Add MariaDB repository
-RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 \
+RUN apt-key adv --no-tty --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 \
     && echo "deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/$MARIADB_MAJOR/debian stretch main" > /etc/apt/sources.list.d/mariadb.list \
     && { \
 		     echo 'Package: *'; \
