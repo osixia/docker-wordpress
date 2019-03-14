@@ -6,7 +6,7 @@ A docker image to run wordpress
 
 [hub]: https://hub.docker.com/r/osixia/wordpress/
 
-Latest release: 5.0.3 - Wordpress 5.0.3 -  [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/osixia/wordpress) 
+Latest release: 5.1.1 - Wordpress 5.1.1 -  [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/osixia/wordpress) 
 
 ### Under the hood: osixia/web-baseimage
 

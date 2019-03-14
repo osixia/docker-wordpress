@@ -1,8 +1,8 @@
 FROM osixia/web-baseimage:1.1.1
 
 # Wordpress version
-ARG WORDPRESS_VERSION=5.0.3
-ARG WORDPRESS_MD5=83bec78836aabac08f769d50f1bffe5d
+ARG WORDPRESS_VERSION=5.1.1
+ARG WORDPRESS_MD5=e878b33b520f61e61f2caa0f08886c1b
 
 # MariaDB version
 ARG MARIADB_MAJOR=10.3
@@ -13,34 +13,34 @@ ARG MARIADB_MAJOR=10.3
 
 # Add MariaDB repository
 RUN apt-key adv --no-tty --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8 \
-    && echo "deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/$MARIADB_MAJOR/debian stretch main" > /etc/apt/sources.list.d/mariadb.list \
-    && { \
-		     echo 'Package: *'; \
-		     echo 'Pin: release o=MariaDB'; \
-		     echo 'Pin-Priority: 999'; \
-	     } > /etc/apt/preferences.d/mariadb
+	&& echo "deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/$MARIADB_MAJOR/debian stretch main" > /etc/apt/sources.list.d/mariadb.list \
+	&& { \
+	echo 'Package: *'; \
+	echo 'Pin: release o=MariaDB'; \
+	echo 'Pin-Priority: 999'; \
+	} > /etc/apt/preferences.d/mariadb
 
 # Download, check integrity and unzip wordpress to /var/www/wordpress_bootstrap,
 RUN apt-get update \
-  	&& /container/tool/add-multiple-process-stack \
-  	&& /container/tool/add-service-available :apache2 :php7.0-fpm :ssl-tools \
-  	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-  		 ca-certificates \
-  		 curl \
-  		 mariadb-client-$MARIADB_MAJOR \
-  		 php7.0-apc \
-  		 php7.0-gd \
-  		 php7.0-mcrypt \
-  		 php7.0-mysql \
-  		 php7.0-ldap \
-  	&& curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
-  	&& echo "$WORDPRESS_MD5 *wordpress.tar.gz" | md5sum -c - \
-  	&& mkdir -p /var/www/wordpress_bootstrap /var/www/wordpress \
-  	&& tar -xzf wordpress.tar.gz --strip 1 -C /var/www/wordpress_bootstrap \
-  	&& apt-get remove -y --purge --auto-remove curl ca-certificates \
-    && rm wordpress.tar.gz \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	&& /container/tool/add-multiple-process-stack \
+	&& /container/tool/add-service-available :apache2 :php7.0-fpm :ssl-tools \
+	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+	ca-certificates \
+	curl \
+	mariadb-client-$MARIADB_MAJOR \
+	php7.0-apc \
+	php7.0-gd \
+	php7.0-mcrypt \
+	php7.0-mysql \
+	php7.0-ldap \
+	&& curl -o wordpress.tar.gz -SL https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz \
+	&& echo "$WORDPRESS_MD5 *wordpress.tar.gz" | md5sum -c - \
+	&& mkdir -p /var/www/wordpress_bootstrap /var/www/wordpress \
+	&& tar -xzf wordpress.tar.gz --strip 1 -C /var/www/wordpress_bootstrap \
+	&& apt-get remove -y --purge --auto-remove curl ca-certificates \
+	&& rm wordpress.tar.gz \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add service directory to /container/service
 ADD service /container/service
