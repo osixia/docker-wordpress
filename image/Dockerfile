@@ -1,8 +1,8 @@
-FROM osixia/web-baseimage:1.1.1
+FROM osixia/web-baseimage:1.1.2
 
 # Wordpress version
-ARG WORDPRESS_VERSION=5.1.1
-ARG WORDPRESS_MD5=e878b33b520f61e61f2caa0f08886c1b
+ARG WORDPRESS_VERSION=5.2.1
+ARG WORDPRESS_MD5=aa13bf5f99e05fe8ab24940b382f2e3f
 
 # MariaDB version
 ARG MARIADB_MAJOR=10.3
