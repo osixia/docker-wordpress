@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project follows Wordpress versioning.
 
+## [5.2.3] - 2019-09-29
+## Added
+  - Multiarch support
+
+### Changed
+  - Upgrade Wordpress version to 5.2.3
+  - Upgrade baseimage to web-baseimage:1.2.0 (debian buster)
+
 ## [5.2.1] - 2019-05-29
 ### Changed
   - Upgrade Wordpress version to 5.2.1
@@ -110,6 +118,7 @@ and this project follows Wordpress versioning.
 ## 0.1.0 - 2015-02-23
 Initial release
 
+[5.2.3]: https://github.com/osixia/docker-wordpress/compare/v5.2.1...v5.2.3
 [5.2.1]: https://github.com/osixia/docker-wordpress/compare/v5.1.1...v5.2.1
 [5.1.1]: https://github.com/osixia/docker-wordpress/compare/v5.0.3...v5.1.1
 [5.0.3]: https://github.com/osixia/docker-wordpress/compare/v4.9.7...v5.0.3
