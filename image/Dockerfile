@@ -1,8 +1,8 @@
 FROM osixia/web-baseimage:release-1.2.0-dev
 
 # Wordpress version
-ARG WORDPRESS_VERSION=5.3
-ARG WORDPRESS_MD5=b4ffcc17cbe6a6546fba4112d55e8ba5
+ARG WORDPRESS_VERSION=5.4.1
+ARG WORDPRESS_MD5=346afd52e893b2492e5899e4f8c91c43
 
 # Install apache2 and php7.3-fpm using osixia/baseimage utils
 # Caution: /container/tool/install-service-available arguments order is important
